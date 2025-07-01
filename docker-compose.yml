@@ -2,6 +2,7 @@
 services:
     php:
         build: ./php/${PHP_VERSION}
+        container_name: bitrix_php
         volumes:
             - ${SITE_PATH}:/var/www/bitrix
             - ./logs/php:/var/log/php
@@ -12,22 +13,26 @@ services:
             - bitrixdock
         restart: unless-stopped
         extra_hosts:
-            - "bitrix.local:172.18.0.9"
+            - 'host.docker.internal:host-gateway'
 
     web_server:
         build: ./${WEB_SERVER_TYPE}
+        container_name: bitrix_${WEB_SERVER_TYPE}
+        depends_on:
+            - php
         volumes:
             - ${SITE_PATH}:/var/www/bitrix
             - ./logs/${WEB_SERVER_TYPE}:/var/log/${WEB_SERVER_TYPE}
             - /etc/localtime:/etc/localtime/:ro
         ports:
-            - '${INTERFACE}:81:80'
-            - '${INTERFACE}:443:443'
+            - '81:80'
         networks:
             - bitrixdock
         environment:
             TZ: Europe/Moscow
         restart: unless-stopped
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
 
 networks:
     bitrixdock:
