@@ -11,7 +11,6 @@ services:
             TZ: Europe/Moscow
         networks:
             - bitrixdock
-        restart: unless-stopped
         extra_hosts:
             - 'host.docker.internal:host-gateway'
 
@@ -30,7 +29,6 @@ services:
             - bitrixdock
         environment:
             TZ: Europe/Moscow
-        restart: unless-stopped
         extra_hosts:
             - 'host.docker.internal:host-gateway'
 
