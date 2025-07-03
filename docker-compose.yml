@@ -13,6 +13,8 @@ services:
             - bitrixdock
         extra_hosts:
             - 'host.docker.internal:host-gateway'
+            - 'catalog.may24.local:host-gateway'
+            - 'may24.local:host-gateway'
 
     web_server:
         build: ./${WEB_SERVER_TYPE}
