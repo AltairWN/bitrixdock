@@ -31,6 +31,8 @@ services:
             TZ: Europe/Moscow
         extra_hosts:
             - 'host.docker.internal:host-gateway'
+            - 'catalog.may24.local:host-gateway'
+            - 'may24.local:host-gateway'
 
 networks:
     bitrixdock:
