@@ -26,7 +26,7 @@ services:
             - ./logs/${WEB_SERVER_TYPE}:/var/log/${WEB_SERVER_TYPE}
             - /etc/localtime:/etc/localtime/:ro
         ports:
-            - '80:81'
+            - '81:80'
         networks:
             - bitrixdock
         environment:
