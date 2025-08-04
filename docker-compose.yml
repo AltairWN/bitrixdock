@@ -1,7 +1,7 @@
 ---
 services:
     php:
-        build: ./php/${PHP_VERSION}
+        build: ./php/php71
         container_name: bitrix_php
         volumes:
             - ${SITE_PATH}:/var/www/bitrix
@@ -17,13 +17,13 @@ services:
             - 'may24.local:host-gateway'
 
     web_server:
-        build: ./${WEB_SERVER_TYPE}
-        container_name: bitrix_${WEB_SERVER_TYPE}
+        build: ./nginx
+        container_name: bitrix_nginx
         depends_on:
             - php
         volumes:
             - ${SITE_PATH}:/var/www/bitrix
-            - ./logs/${WEB_SERVER_TYPE}:/var/log/${WEB_SERVER_TYPE}
+            - ./logs/nginx:/var/log/nginx
             - /etc/localtime:/etc/localtime/:ro
         ports:
             - '81:80'
