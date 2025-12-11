@@ -1,7 +1,7 @@
 ---
 services:
     php:
-        build: ./php/php71
+        build: ./php/php84
         container_name: bitrix_php
         volumes:
             - ${SITE_PATH}:/var/www/bitrix
