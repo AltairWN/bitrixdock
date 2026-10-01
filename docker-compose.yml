@@ -11,10 +11,11 @@ services:
             TZ: Europe/Moscow
         networks:
             - bitrixdock
+            - server
+        dns:
+            - 172.30.0.53
         extra_hosts:
             - 'host.docker.internal:host-gateway'
-            - 'catalog.may24.local:host-gateway'
-            - 'may24.local:host-gateway'
 
     web_server:
         build: ./nginx
@@ -29,13 +30,17 @@ services:
             - '81:80'
         networks:
             - bitrixdock
+            - server
         environment:
             TZ: Europe/Moscow
+        dns:
+            - 172.30.0.53
         extra_hosts:
             - 'host.docker.internal:host-gateway'
-            - 'catalog.may24.local:host-gateway'
-            - 'may24.local:host-gateway'
 
 networks:
     bitrixdock:
         driver: bridge
+    # Общая сеть docker_server (БД, Redis, Caddy, dnsmasq)
+    server:
+        external: true
